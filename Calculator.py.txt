@@ -1,0 +1,92 @@
+from tkinter import *
+top=Tk()
+top.title("Simple Calculator")
+top.geometry("300x335")
+top.resizable(0,0)
+#top.configure(bg="black")
+flag=0
+def btn_click(num):
+    global expression
+    global flag 
+    if (num==1 or num==2 or num==3 or num==4 or num==5 or num==6 or num==7 or num==8 or num==9 or num==0):
+        expression=expression + str(num)
+        inp.set(expression)
+        flag=0
+    elif flag==1:    
+        btn_del()
+        expression=expression+ str(num)
+        inp.set(expression)
+        flag=1
+    elif (num=="+" or num=="-" or num=="*" or num=="/"):
+        flag=1
+        if expression=="":
+            expression=expression+ "0" + str(num)
+        else:    
+            expression=expression + str(num)
+        inp.set(expression)
+
+def btn_del(): 
+    global expression 
+    expression = expression[0:-1]
+    inp.set(expression)
+    
+
+def btn_clear():
+    global expression
+    expression=""
+    inp.set("0")
+    
+def btn_equal():
+    if flag==1:
+        btn_del()
+    try:
+        global expression
+        result = str(eval(expression))
+        inp.set(result)
+        expression = str(result)    
+    except:
+        inp.set("ERROR")
+        expression=""
+expression=""   
+inp=StringVar()
+inp.set("0")
+
+tx=Entry(top,textvariable=inp,bg="red",width=26,font=55,justify=RIGHT,state=DISABLED,disabledforeground="black")
+tx.pack(side=TOP)
+b1=Button(top, text = "AC", fg = "red", width = 18, height = 3, bd = 0,bg="yellow",command = lambda: btn_clear())
+b1.place(x=5,y=31)
+bd=Button(top, text = "Del", fg = "black", width = 8, height = 3, bd = 0,bg="red",command = lambda: btn_del())
+bd.place(x=145,y=31)
+b2=Button(top, text = "/", fg = "black", width = 11, height = 3, bd = 0,bg="light blue",command = lambda: btn_click("/"))
+b2.place(x=210,y=31)
+b3=Button(top, text = "*", fg = "black", width = 11, height = 3, bd = 0,bg="light blue",command = lambda: btn_click("*"))
+b3.place(x=210,y=91)
+b4=Button(top, text = "-", fg = "black", width = 11, height = 3, bd = 0,bg="light blue",command = lambda: btn_click("-"))
+b4.place(x=210,y=151)
+b5=Button(top, text = "+", fg = "black", width = 11, height = 3, bd = 0,bg="light blue",command = lambda: btn_click("+"))
+b5.place(x=210,y=211)
+b6=Button(top, text = "=", fg = "black", width = 11, height = 3, bd = 0,bg="light blue",command = lambda: btn_equal())
+b6.place(x=210,y=271)
+n1=Button(top, text = "7", fg = "black", width = 8, height = 3, bd = 0,bg="light green",command = lambda: btn_click(7))
+n1.place(x=5,y=91)
+n2=Button(top, text = "8", fg = "black", width = 8, height = 3, bd = 0,bg="light green",command = lambda: btn_click(8))
+n2.place(x=75,y=91)
+n3=Button(top, text = "9", fg = "black", width = 8, height = 3, bd = 0,bg="light green",command = lambda: btn_click(9))
+n3.place(x=145,y=91)
+n4=Button(top, text = "4", fg = "black", width = 8, height = 3, bd = 0,bg="light green",command = lambda: btn_click(4))
+n4.place(x=5,y=151)
+n5=Button(top, text = "5", fg = "black", width = 8, height = 3, bd = 0,bg="light green",command = lambda: btn_click(5))
+n5.place(x=75,y=151)
+n6=Button(top, text = "6", fg = "black", width = 8, height = 3, bd = 0,bg="light green",command = lambda: btn_click(6))
+n6.place(x=145,y=151)
+n7=Button(top, text = "1", fg = "black", width = 8, height = 3, bd = 0,bg="light green",command = lambda: btn_click(1))
+n7.place(x=5,y=211)
+n8=Button(top, text = "2", fg = "black", width = 8, height = 3, bd = 0,bg="light green",command = lambda: btn_click(2))
+n8.place(x=75,y=211)
+n9=Button(top, text = "3", fg = "black", width = 8, height = 3, bd = 0,bg="light green",command = lambda: btn_click(3))
+n9.place(x=145,y=211)
+n10=Button(top, text = "0", fg = "black", width = 18, height = 3, bd = 0,bg="light green",command = lambda: btn_click(0))
+n10.place(x=5,y=271)
+n11=Button(top, text = ".", fg = "black", width = 8, height = 3, bd = 0,bg="light green",command = lambda: btn_click("."))
+n11.place(x=145,y=271)
+top.mainloop()
