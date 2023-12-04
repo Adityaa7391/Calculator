@@ -27,15 +27,30 @@ def btn_click(num):
 
 def btn_del(): 
     global expression 
+    global flag
+    if expression=="":
+        
+        n="0"
+    else:    
+        n=expression[-1]
+    if(n.isdigit()):
+        pass
+    else :
+        flag=0  
+    
     expression = expression[0:-1]
-    inp.set(expression)
+    if expression=="":
+        inp.set("0")
+    else:    
+        inp.set(expression)
     
 
 def btn_clear():
     global expression
+    global flag
     expression=""
     inp.set("0")
-    
+    flag=0
 def btn_equal():
     if flag==1:
         btn_del()
