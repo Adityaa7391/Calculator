@@ -9,6 +9,10 @@ def btn_click(num):
     global expression
     global flag 
     if (num==1 or num==2 or num==3 or num==4 or num==5 or num==6 or num==7 or num==8 or num==9 or num==0):
+        if expression=="" or expression=="0":
+            expression=""
+        elif expression[-1]=="0" and expression[-2]!="." and (expression[-2].isdigit()==False):
+            expression=expression[0:-1]    
         expression=expression + str(num)
         inp.set(expression)
         flag=0
@@ -16,9 +20,11 @@ def btn_click(num):
         btn_del()
         expression=expression+ str(num)
         inp.set(expression)
+
         flag=1
-    elif (num=="+" or num=="-" or num=="*" or num=="/"):
+    elif (num=="+" or num=="-" or num=="*" or num=="/" or num=="."):
         flag=1
+
         if expression=="":
             expression=expression+ "0" + str(num)
         else:    
@@ -29,7 +35,7 @@ def btn_del():
     global expression 
     global flag
     if expression=="":
-        
+
         n="0"
     else:    
         n=expression[-1]
